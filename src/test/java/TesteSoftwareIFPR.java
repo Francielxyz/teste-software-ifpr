@@ -60,7 +60,7 @@ public class TesteSoftwareIFPR {
         ProblemasIFPR.terceiroProblema(new int[]{14, 5, 9, 4, 83, 169, 1423, 434, 22, 6});
 
         assertEquals("14,4,434,22,6,5,9,83,169,1423,", byteArrayOutputStream.toString().replaceAll("\\s+", ""));
-        // TODOD - Foi adicionado uma vírgula no print do terceiro problema para apresentar separadamente os números
+        // TODO - Foi adicionado uma vírgula no print do terceiro problema para apresentar separadamente os números
         // pares e ímpares.
     }
 
@@ -70,7 +70,7 @@ public class TesteSoftwareIFPR {
         ProblemasIFPR.terceiroProblema(new int[]{1, 5, 9, 4, 83, 169, 45, 434, 22, 6, 3, 2, 2, 57, 4});
 
         assertEquals("4,434,22,6,1,5,9,83,169,45,", byteArrayOutputStream.toString().replaceAll("\\s+", ""));
-        // TODOD - Foi adicionado uma vírgula no print do terceiro problema para apresentar separadamente os números
+        // TODO - Foi adicionado uma vírgula no print do terceiro problema para apresentar separadamente os números
         // pares e ímpares.
     }
 
