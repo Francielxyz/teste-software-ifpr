@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -24,60 +25,70 @@ public class TesteSoftwareIFPR {
     }
 
     @Test
-    @Name("Deve testar o primeiro problema com número que seja menor do que 1")
-    public void testarPrimeiroProblemaNumeroMenorQueUm() {
-        ProblemasIFPR.primeiroProblema(-1);
-
-        assertEquals("0", byteArrayOutputStream.toString().replaceAll("\\s+", ""));
+    @Name("Deve testar o primeiro problema caminho Base: a - b - d")
+    public void testarPrimeiroProblemaCaminhoABD() {
+        assertEquals("0", ProblemasIFPR.primeiroProblema(1));
     }
 
     @Test
-    @Name("Deve testar o primeiro problema com número que seja igual a 1")
-    public void testarPrimeiroProblemaNumeroIguaAUm() {
-        ProblemasIFPR.primeiroProblema(1);
-
-        assertEquals("0", byteArrayOutputStream.toString().replaceAll("\\s+", ""));
+    @Name("Deve testar o primeiro problema caminho: a - b - c - e - d")
+    public void testarPrimeiroProblemaCaminhoABCED() {
+        assertEquals("0 1", ProblemasIFPR.primeiroProblema(2));
     }
 
     @Test
-    @Name("Deve testar o primeiro problema com número que seja maior do que 1")
-    public void testarPrimeiroProblemaNumeroMaiorQueUm() {
-        ProblemasIFPR.primeiroProblema(3);
-        assertEquals("011", byteArrayOutputStream.toString().replaceAll("\\s+", ""));
+    @Name("Deve testar o primeiro problema caminho: a - b - c - e - f - d ")
+    public void testarPrimeiroProblemaCaminhoABCEFD() {
+        assertEquals("0 1 1", ProblemasIFPR.primeiroProblema(3));
     }
 
     @Test
-    @Name("Deve testar o segundo problema")
-    public void testarSegundoProblema() {
-        ProblemasIFPR.segundoProblema(10, 1, new int[]{1, 10});
-
-        assertEquals("9", byteArrayOutputStream.toString().replaceAll("\\s+", ""));
+    @Name("Deve testar segundo problema caminho Base: a - b - c - b - d - e - g - h - e - f")
+    public void testarSegundoProblemaCaminhoABCBDEGHEF() {
+        // todo - verificar se ficou correto
+        assertEquals(9, ProblemasIFPR.segundoProblema(10, 1, new int[]{1, 10}));
     }
 
     @Test
-    @Name("Deve teste o terceiro problema com números par a esquerda e impares a direita PT1")
-    public void testarTerceiroProblemaParImpar1() {
-        ProblemasIFPR.terceiroProblema(new int[]{14, 5, 9, 4, 83, 169, 1423, 434, 22, 6});
-
-        assertEquals("14,4,434,22,6,5,9,83,169,1423,", byteArrayOutputStream.toString().replaceAll("\\s+", ""));
-        // TODO - Foi adicionado uma vírgula no print do terceiro problema para apresentar separadamente os números
-        // pares e ímpares.
+    @Name("Deve testar o segundo problema caminho: a - b - d - e - f")
+    public void testarSegundoProblemaCaminhoABDEF() {
+        assertEquals(0, ProblemasIFPR.segundoProblema(0, 0, new int[]{0, 0}));
     }
 
     @Test
-    @Name("Deve teste o terceiro problema com números par a esquerda e impares a direita PT2.")
-    public void testarTerceiroProblemaParImpar2() {
-        ProblemasIFPR.terceiroProblema(new int[]{1, 5, 9, 4, 83, 169, 45, 434, 22, 6, 3, 2, 2, 57, 4});
-
-        assertEquals("4,434,22,6,1,5,9,83,169,45,", byteArrayOutputStream.toString().replaceAll("\\s+", ""));
-        // TODO - Foi adicionado uma vírgula no print do terceiro problema para apresentar separadamente os números
-        // pares e ímpares.
+    @Name("Deve testar o segundo problema caminho: a - b - d - e - g - e - f")
+    public void testarSegundoProblemaCaminhoABDEGEF() {
+        // TODO - NÃO CONSEGUI IMPLEMENTAR
+        assertEquals(0, ProblemasIFPR.segundoProblema(10, 0, new int[]{}));
     }
 
     @Test
-    @Name("Deve teste o terceiro problema onde que o total de números passados por parâmetro seja menor que 10.")
-    public void testarTerceiroProblemaErroIndexThrows() {
-        assertThrows(ArrayIndexOutOfBoundsException.class,
-                () -> ProblemasIFPR.terceiroProblema(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9}));
+    @Name("Deve teste o terceiro problema caminho Base: a - b - c")
+    public void testarTerceiroProblemaCaminhoABC() {
+        // TODO - Este caminho é impossível de testar uma vez que a variável "i" sempre vai ser menor que 10
+    }
+
+    @Test
+    @Name("Deve teste o terceiro problema caminho a - b - d - e - b - c")
+    public void testarTerceiroProblemaCaminhoABDEBC() {
+        int[] numeros = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+        ArrayList<int[]> retorno = new ArrayList<int[]>();
+        retorno.add(numeros);
+        retorno.add(new int[0]);
+
+        assertEquals(retorno, ProblemasIFPR.terceiroProblema(numeros));
+    }
+
+    @Test
+    @Name("Deve teste o terceiro problema caminho a - b - d - f - b - c")
+    public void testarTerceiroProblemaCaminhoABDFBC() {
+        int[] numeros = new int[]{1, 3, 5, 7, 9, 13, 3, 1, 5, 11};
+
+        ArrayList<int[]> retorno = new ArrayList<int[]>();
+        retorno.add(new int[0]);
+        retorno.add(numeros);
+
+        assertEquals(retorno, ProblemasIFPR.terceiroProblema(numeros));
     }
 }
