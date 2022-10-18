@@ -1,29 +1,12 @@
 import jdk.jfr.Name;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertArrayEquals;
 
 public class TesteSoftwareIFPR {
-    private final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-    private final PrintStream printStream = System.out;
-
-    @Before
-    public void init() {
-        System.setOut(new PrintStream(byteArrayOutputStream));
-    }
-
-    @After
-    public void end() {
-        System.setOut(new PrintStream(printStream));
-    }
-
     @Test
     @Name("Deve testar o primeiro problema caminho Base: a - b - d")
     public void testarPrimeiroProblemaCaminhoABD() {
@@ -45,8 +28,7 @@ public class TesteSoftwareIFPR {
     @Test
     @Name("Deve testar segundo problema caminho Base: a - b - c - b - d - e - g - h - e - f")
     public void testarSegundoProblemaCaminhoABCBDEGHEF() {
-        // todo - verificar se ficou correto
-        assertEquals(9, ProblemasIFPR.segundoProblema(10, 1, new int[]{1, 10}));
+        assertEquals(1, ProblemasIFPR.segundoProblema(1, 1, new int[]{0, 0}));
     }
 
     @Test
@@ -56,10 +38,9 @@ public class TesteSoftwareIFPR {
     }
 
     @Test
-    @Name("Deve testar o segundo problema caminho: a - b - d - e - g - e - f")
-    public void testarSegundoProblemaCaminhoABDEGEF() {
-        // TODO - NÃO CONSEGUI IMPLEMENTAR
-        assertEquals(0, ProblemasIFPR.segundoProblema(10, 0, new int[]{}));
+    @Name("Deve testar o segundo problema caminho: a - b - c - b - c - b - d - e - g - e - f")
+    public void testarSegundoProblemaCaminhoABCBCBDEGEF() {
+        assertEquals(0, ProblemasIFPR.segundoProblema(1, 2, new int[]{0, 1}));
     }
 
     @Test
@@ -77,7 +58,8 @@ public class TesteSoftwareIFPR {
         retorno.add(numeros);
         retorno.add(new int[0]);
 
-        assertEquals(retorno, ProblemasIFPR.terceiroProblema(numeros));
+        assertArrayEquals(retorno.get(0), ProblemasIFPR.terceiroProblema(numeros).get(0));
+        assertArrayEquals(retorno.get(1), ProblemasIFPR.terceiroProblema(numeros).get(1));
     }
 
     @Test
@@ -89,6 +71,7 @@ public class TesteSoftwareIFPR {
         retorno.add(new int[0]);
         retorno.add(numeros);
 
-        assertEquals(retorno, ProblemasIFPR.terceiroProblema(numeros));
+        assertArrayEquals(retorno.get(0), ProblemasIFPR.terceiroProblema(numeros).get(0));
+        assertArrayEquals(retorno.get(1), ProblemasIFPR.terceiroProblema(numeros).get(1));
     }
 }
